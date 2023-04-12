@@ -103,7 +103,7 @@ def productSituationUpdate():
         print("Nao ha produto com o codigo informado!\n")
 
 # declaracao vazia de variavel que inicializa a escolha do usuario
-userChoise = ''
+userChoise = None
 
 # loop para a acao que o usuario deseja performar
 while userChoise != "s":
