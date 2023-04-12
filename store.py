@@ -126,3 +126,5 @@ while userChoise != "s":
     # usuario deseja consultar produtos cadastrados
     elif userChoise == 'c':
         queryProducts()
+        
+# <!--Andyです-->
