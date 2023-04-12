@@ -50,7 +50,7 @@ def queryProducts():
     if len(myresult) != 0:
         
         # headers da table retornada
-        print("codigo, quant, val_BRL, situacao")
+        print("codigo, nome, quant, val_BRL, situacao")
         # saida dos valores em tela
         for x in myresult:
             if x != '':
