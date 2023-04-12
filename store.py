@@ -53,8 +53,7 @@ def queryProducts():
         print("codigo, quant, val_BRL, situacao")
         # saida dos valores em tela
         for x in myresult:
-            if x != '':
-                print(x)
+            print(x)
     
     # caso a array estaja vazio, tamanho de array == 0
     else:
@@ -69,24 +68,21 @@ def productSituationUpdate():
 
     # query seleciona produto com o codigo informado para verificar sua existencia
     sql = "SELECT * FROM products WHERE cod_prod = %s"
-    adr = (cod_prod, )
+    adr = (int(cod_prod), )
 
     # execucao da query
     mycursor.execute(sql, adr)
 
     # faz o fetch dos dados para uma array
     myresult = mycursor.fetchall()
-    # declaracao de x vazio
-    x = ''
-    for x in myresult:
-        x = x
-    # verifica se o produto existe atraves da verificacao do valor de x
-    if x != '':
+
+    # verifica se o produto existe atraves da verificacao do tamanho da array
+    if len(myresult) != 0:
         # se o produto existe, usuario informa qual quer que seja a situacao do produto
         situation_prod = input("situacao do produto:\t")
 
         # valida a entrada do usuario, endo 1 ou 0
-        if re.match(pattern, cod_prod):
+        if re.match(pattern, situation_prod):
 
             # query para atualizacao do produto com codigo e situacao passados pelo usuario
             sql = "UPDATE products SET situation_prod = %s WHERE cod_prod = %s"
@@ -98,7 +94,7 @@ def productSituationUpdate():
             mydb.commit()
 
             # retorno positivo da insercao
-            print(mycursor.rowcount, "produto(s) afetado(s)\n")
+            print(mycursor.rowcount, "produto atualizado\n")
         else:
             # o usuario nao informou uma situacao validade para o produto (nao foi 1 e nem 0)
             input('Entrada Invalida!\n')
@@ -126,5 +122,5 @@ while userChoise != "s":
     # usuario deseja consultar produtos cadastrados
     elif userChoise == 'c':
         queryProducts()
-        
+
 # <!--Andyです-->
