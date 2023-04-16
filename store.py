@@ -71,6 +71,9 @@ try:
         #usuario deve informar o codigo do produto
         cod_prod = input("Codigo do produto:\t")
 
+    # query seleciona produto com o codigo informado para verificar sua existencia
+    sql = "SELECT * FROM products WHERE cod_prod = %s"
+    adr = (int(cod_prod), )
         # query seleciona produto com o codigo informado para verificar sua existencia
         sql = "SELECT * FROM products WHERE cod_prod = %s"
         adr = (cod_prod, )
@@ -78,6 +81,13 @@ try:
         # execucao da query
         mycursor.execute(sql, adr)
 
+    # faz o fetch dos dados para uma array
+    myresult = mycursor.fetchall()
+
+    # verifica se o produto existe atraves da verificacao do tamanho da array
+    if len(myresult) != 0:
+        # se o produto existe, usuario informa qual quer que seja a situacao do produto
+        situation_prod = input("situacao do produto:\t")
         # faz o fetch dos dados para uma array
         myresult = mycursor.fetchall()
         
@@ -86,6 +96,8 @@ try:
             # se o produto existe, usuario informa qual quer que seja a situacao do produto
             situation_prod = int(str("situacao do produto:\t"))
 
+        # valida a entrada do usuario, endo 1 ou 0
+        if re.match(pattern, situation_prod):
             # valida a entrada do usuario, endo 1 ou 0
             if re.match(pattern, cod_prod):
 
@@ -98,6 +110,14 @@ try:
 
                 mydb.commit()
 
+            # retorno positivo da insercao
+            print(mycursor.rowcount, "produto atualizado\n")
+        else:
+            # o usuario nao informou uma situacao validade para o produto (nao foi 1 e nem 0)
+            input('Entrada Invalida!\n')
+    else:
+        # caso nao seja localizado produto com o codigo informado
+        print("Nao ha produto com o codigo informado!\n")
                 # retorno positivo da insercao
                 print(mycursor.rowcount, "produto(s) afetado(s)\n")
             else:
@@ -107,6 +127,8 @@ try:
             # caso nao seja localizado produto com o codigo informado
             print("Nao ha produto com o codigo informado!\n")
 
+# declaracao vazia de variavel que inicializa a escolha do usuario
+userChoise = None
     # declaracao vazia de variavel que inicializa a escolha do usuario
     userChoise = ''
 
