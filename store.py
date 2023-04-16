@@ -68,7 +68,7 @@ try:
     def productSituationUpdate():
         mycursor = mydb.cursor()
 
-        #usuario deve informar o codigo do produto
+        # usuario deve informar o codigo do produto
         cod_prod = input("Codigo do produto:\t")
 
         # query seleciona produto com o codigo informado para verificar sua existencia
@@ -80,14 +80,14 @@ try:
 
         # faz o fetch dos dados para uma array
         myresult = mycursor.fetchall()
-        
-        # verifica se o produto existe atraves da verificacao do valor de x
-        if len(myresult) != 0:
-            # se o produto existe, usuario informa qual quer que seja a situacao do produto
-            situation_prod = int(str("situacao do produto:\t"))
 
-            # valida a entrada do usuario, endo 1 ou 0
-            if re.match(pattern, cod_prod):
+        # declaracao de x vazio
+        if len(myresult) > 0:
+            # se o produto existe, usuario informa qual quer que seja a situacao do produto
+            situation_prod = input("Nova situacao do produto:\t")
+
+            # valida a entrada do usuario, sendo 1 ou 0
+            if re.match(pattern, situation_prod):
 
                 # query para atualizacao do produto com codigo e situacao passados pelo usuario
                 sql = "UPDATE products SET situation_prod = %s WHERE cod_prod = %s"
@@ -106,6 +106,7 @@ try:
         else:
             # caso nao seja localizado produto com o codigo informado
             print("Nao ha produto com o codigo informado!\n")
+
 
     # declaracao vazia de variavel que inicializa a escolha do usuario
     userChoise = None
@@ -127,8 +128,6 @@ try:
         # usuario deseja consultar produtos cadastrados
         elif userChoise == 'c':
             queryProducts()
-        else:
-            print("opcao inexistente!\n")
 
 except mysql.connector.Error as error:
     print("Erro ao conectar ao MySQL:", error)
