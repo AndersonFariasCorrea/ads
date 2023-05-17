@@ -51,7 +51,7 @@ def generatePassword(length):
             c = 0
         element = list[len(timestamp) - c]
 
-        # and de incrementarverifica se o ultimo elemento está sendo repetido 
+        # Verifica se o ultimo elemento está sendo repetido 
         # se sim, procura novo elemento
         if len(password) > 0 and str(password[len(password) -1]) == element:
             password = password[:-1]
