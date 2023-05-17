@@ -8,7 +8,12 @@ special_characters = ('!', '@', '#', '$', '%', '&', '*', '(', ')', '-', '_', '+'
 
 def parse_string_to_int(string):
     try:
+        result = None
         number = int(string)
-        return number, True
+        if number >= 6 and number <= 16:
+            result = number, True
+        else:
+            result = None, False
+        return result, 
     except ValueError:
         return None, False
