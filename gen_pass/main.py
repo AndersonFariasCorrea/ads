@@ -35,7 +35,8 @@ def generatePassword(length):
     password = ''
     c = 0
 
-    for i in range(length):
+    i = 0
+    while i < length:
         
         # gerar o index 
         char = timestamp[i % len(timestamp)]
@@ -53,10 +54,15 @@ def generatePassword(length):
         # and de incrementarverifica se o ultimo elemento está sendo repetido 
         # se sim, procura novo elemento
         if len(password) > 0 and str(password[len(password) -1]) == element:
+            password = password[:-1]
+            length += 1
+            # print('repetiu: ' + str(length))
+            timestamp = random()
+
             # gerar o index 
             char = timestamp[i % len(timestamp)]
             index = int(char)
-            print ('a' + str(index))
+            # print ('a' + str(index))
 
             # seleciona a list
             list = data['a' + str(index)]
@@ -66,12 +72,14 @@ def generatePassword(length):
                 c = 0
             element = list[len(timestamp) - c]
 
+            timestamp = random()
+
         password += element
 
         # novo num aleatório baseado no tempo
         timestamp = random()
         c += 1
-
+        i += 1
     return password
 
 password = generatePassword(pass_length[0])
