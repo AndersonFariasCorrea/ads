@@ -13,32 +13,64 @@ data = {
     'a3': ['u', 'v', 'w', 'x', 'ì', 'î', 'ó', 'ò', 'ô', 'ç'],
     
     'a4': ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'],
-    'a5': ['K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T'],
+
+    'a5':[ '_', '+', '=', '[', ']', '{', '}', '<', '>',','],
+
     'a6': ['U', 'V', 'W', 'X', 'Y', 'Z', 'Á', 'À', 'Â', 'Ã'],
     'a7': ['É', 'È', 'Ê', 'Í', 'Ì', 'Î', 'Ó', 'Ò', 'Ô', 'Ç'],
 
     'a8': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
 
     'a9': ['!', '@', '#', '$', '%', '&', '*', '(', ')', '-'],
-    'a10':[ '_', '+', '=', '[', ']', '{', '}', '<', '>',','],
+
+    'a10': ['K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T'],
+    
 }
+def random():
+    timestamp = str(int(time.time_ns()) % 10000)
+    return timestamp
 
 def generatePassword(length):
-    timestamp = str(int(time.time()))
+    timestamp = random()
     password = ''
+    c = 0
 
     for i in range(length):
+        
+        # gerar o index 
         char = timestamp[i % len(timestamp)]
         index = int(char)
+        print ('a' + str(index))
 
-        array = data['a' + str(index)]
+        # seleciona a list
+        list = data['a' + str(index)]
 
-        elementIndex = index % len(array)
-        element = array[elementIndex]
+        # seleciona o caractere dentro da list
+        if c > 10:
+            c = 0
+        element = list[len(timestamp) - c]
+
+        # and de incrementarverifica se o ultimo elemento está sendo repetido 
+        # se sim, procura novo elemento
+        if len(password) > 0 and str(password[len(password) -1]) == element:
+            # gerar o index 
+            char = timestamp[i % len(timestamp)]
+            index = int(char)
+            print ('a' + str(index))
+
+            # seleciona a list
+            list = data['a' + str(index)]
+
+            # seleciona o caractere dentro da list
+            if c > 10:
+                c = 0
+            element = list[len(timestamp) - c]
 
         password += element
 
-        timestamp = str(int(time.time()))
+        # novo num aleatório baseado no tempo
+        timestamp = random()
+        c += 1
 
     return password
 
