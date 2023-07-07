@@ -5,7 +5,7 @@ import mysql.connector
 # meu arquivo com os dados de conexao
 import db
 
-# biblioteca regax para tratamento de entradas e formatacoes
+# biblioteca regex para tratamento de entradas e formatacoes
 import re
 
 # padrao 1 ou 0 para productSituationUpdate(), situacao de um produto
